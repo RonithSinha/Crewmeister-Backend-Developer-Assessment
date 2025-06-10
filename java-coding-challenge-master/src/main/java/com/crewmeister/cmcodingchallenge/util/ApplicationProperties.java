@@ -11,17 +11,11 @@ import lombok.Data;
 public class ApplicationProperties {
 
 	private Security security = new Security();
-	private ExchangeRateData exchangeRateData = new ExchangeRateData();
 
 	@Data
 	public static class Security {
 		private String username;
 		private String password;
 		private String jwtSecret;
-	}
-
-	@Data
-	public static class ExchangeRateData {
-		private String url;
 	}
 }

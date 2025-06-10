@@ -8,14 +8,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import com.crewmeister.cmcodingchallenge.service.CurrencyService;
 import com.crewmeister.cmcodingchallenge.util.AppConstants;
-import com.crewmeister.cmcodingchallenge.util.ApplicationProperties;
 import com.crewmeister.cmcodingchallenge.util.CommonUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,13 +24,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class CurrencyServiceImpl implements CurrencyService {
-
-	private final ApplicationProperties applicationProperties;
-
-	@Autowired
-	public CurrencyServiceImpl(ApplicationProperties properties) {
-		this.applicationProperties = properties;
-	}
 
 	/**
 	 * Fetches exchange rate data for all supported currencies. Caches the result to
@@ -65,8 +56,7 @@ public class CurrencyServiceImpl implements CurrencyService {
 //		log.info("Fetching data for currency {}", currency);
 		Map<LocalDate, Double> records = new LinkedHashMap<>();
 
-		String templateURL = this.applicationProperties.getExchangeRateData().getUrl();
-		String url = MessageFormat.format(templateURL, currency);
+		String url = MessageFormat.format(AppConstants.EXCHANGE_RATE_DATA_URL, currency);
 
 		try {
 			CSVReader reader = CommonUtil.parseCSV(url);
