@@ -22,6 +22,7 @@ public class AuthServiceImpl implements AuthService {
 		this.applicationProperties = applicationProperties;
 	}
 
+	@Override
 	public Optional<TokenDTO> getToken(LoginRequest request) {
 		// Validate the provided credentials with the values from application.properties
 		if (this.applicationProperties.getSecurity().getUsername().equals(request.getUsername())
