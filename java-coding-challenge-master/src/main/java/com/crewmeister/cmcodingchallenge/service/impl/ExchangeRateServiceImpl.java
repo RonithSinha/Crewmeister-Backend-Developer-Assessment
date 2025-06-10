@@ -36,9 +36,8 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
 	 * improve performance for subsequent requests.
 	 */
 	@EventListener(ApplicationReadyEvent.class)
-	@Override
 	public void loadCurrencyExchangeRateData() {
-		this.currencyService.fetchAllCurrenciesData();
+		currencyService.fetchAllCurrenciesData();
 	}
 
 	/**
@@ -48,7 +47,6 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
 	 * @return Map where key is currency code, and value is a map of date to
 	 *         exchange rate.
 	 */
-	@Override
 	public Map<String, Map<LocalDate, Double>> getAllRates() {
 		return currencyService.fetchAllCurrenciesData();
 	}
@@ -61,7 +59,6 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
 	 *         date.
 	 * @throws Exception if the requested date is in the future.
 	 */
-	@Override
 	public Map<String, Double> getRatesByDate(LocalDate date) throws Exception {
 		if (!date.isBefore(LocalDate.now())) {
 			throw new Exception(AppConstants.PAST_DATE_WARNING);
@@ -87,7 +84,6 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
 	 * @return Optional containing the exchange rate if found, otherwise empty.
 	 * @throws Exception if the requested date is in the future.
 	 */
-	@Override
 	public Optional<Double> getRateByCurrencyAndDate(String currency, LocalDate date) throws Exception {
 		if (!date.isBefore(LocalDate.now())) {
 			throw new Exception(AppConstants.PAST_DATE_WARNING);
@@ -119,7 +115,6 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
 	 *         conversion is not possible.
 	 * @throws Exception if the requested date is in the future.
 	 */
-	@Override
 	public Optional<Double> convertToEur(String currency, LocalDate date, double amount) throws Exception {
 		if (amount < 0) {
 			return Optional.empty(); // Negative amounts cannot be converted
@@ -146,7 +141,6 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
 	 * 
 	 * @return List of currency codes as strings (e.g., ["USD", "GBP", "CHF"])
 	 */
-	@Override
 	public List<String> getAllCurrencies() {
 		return currencyService.getCurrenciesList();
 	}
@@ -155,7 +149,6 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
 	 * Evicts the currency cache and fetches the latest exchange data to refresh the
 	 * cache. Useful to update rates during application runtime.
 	 */
-	@Override
 	public void fetchLatestData() {
 		cacheService.evictCaches(List.of(AppConstants.CURRENCY_CACHE));
 		currencyService.fetchAllCurrenciesData();
@@ -166,7 +159,6 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
 	 * 
 	 * @return Map of currency to date-rate map.
 	 */
-	@Override
 	public Map<String, Map<LocalDate, Double>> getAllCurrenciesData() {
 		return currencyService.fetchAllCurrenciesData();
 	}

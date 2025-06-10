@@ -25,7 +25,6 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class CurrencyServiceImpl implements CurrencyService {
 
-
 	/**
 	 * Fetches exchange rate data for all supported currencies. Caches the result to
 	 * avoid repeated I/O and network calls.
@@ -33,7 +32,6 @@ public class CurrencyServiceImpl implements CurrencyService {
 	 * @return Map of currency code to date-rate map.
 	 */
 	@Cacheable(value = AppConstants.CURRENCY_CACHE)
-	@Override
 	public Map<String, Map<LocalDate, Double>> fetchAllCurrenciesData() {
 		log.info("Fetching data for all currencies");
 		List<String> currencies = this.getCurrenciesList();
@@ -87,7 +85,6 @@ public class CurrencyServiceImpl implements CurrencyService {
 	 *
 	 * @return List of currency codes (e.g., ["USD", "GBP", "CHF"])
 	 */
-	@Override
 	public List<String> getCurrenciesList() {
 		try {
 			InputStream is = new ClassPathResource("currencies.json").getInputStream();
