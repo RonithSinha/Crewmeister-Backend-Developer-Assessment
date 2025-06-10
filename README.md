@@ -8,7 +8,7 @@ This project uses **Swagger UI** to provide interactive documentation for the RE
 
 Once the application is running, you can access Swagger UI at: http://localhost:8080/swagger-ui/index.html
 
-I have also attached the postman collection for the APIs in this repository.
+I have also attached the postman collection for the APIs in this repository - **Foreign exchange service.postman_collection.json**
 
 ### Testing
 
