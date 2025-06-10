@@ -1,0 +1,21 @@
+spring:
+  cache:
+    type: ehcache
+    ehcache:
+      config: classpath:ehcache.xml
+
+logging:
+  level:
+    org.springframework.cache: DEBUG
+
+# Optional: server settings
+server:
+  port: 8080
+
+app:
+  security:
+    username: CrewMeister
+    password: A0OWnJfgLR
+    jwtSecret: P52DahQ9uY
+  exchangeRateData:
+    url: https://api.statistiken.bundesbank.de/rest/download/BBEX3/D.{0}.EUR.BB.AC.000?format=csv&lang=en
